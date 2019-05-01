@@ -93,11 +93,3 @@ test('Defaults to two', async () => {
 
   await Promise.all([twoB, twoB])
 })
-
-test('Throws on negative counts', async () => {
-  await new Promise(resolve => {
-    resolve(sync(-1))
-  }).then(() => {
-    throw new Error('Expected an error')
-  }, err => err)
-})
