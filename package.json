@@ -1,0 +1,33 @@
+{
+  "name": "testsync",
+  "version": "0.1.0",
+  "description": "Helper library for testing intricate async code",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "async",
+    "testing",
+    "promise",
+    "synchronization"
+  ],
+  "typings": "index.d.ts",
+  "author": "Tony Wooster <twooster@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Tony Wooster <twooster@gmail.com>",
+  "homepage": "https://github.com/twooster/testsync#readme",
+  "bugs": {
+    "url": "https://github.com/twooster/testsync/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twooster/testsync.git"
+  }
+}
