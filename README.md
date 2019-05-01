@@ -79,7 +79,7 @@ never throw.
 
 To create new promises, use destructuring:
 
-```
+```javascript
 const [beforeUpdate, afterUpdate, afterSave] = sync()
 const [threeWaySyncPoint] = sync(3)
 ```
@@ -89,7 +89,7 @@ just await them as normal (from within separate async contexts, obviously), and
 when the promise is being awaited in the minimum number of places, it will
 automatically resolve:
 
-```
+```javascript
 const [a, b]
 
 await Promise.all([
