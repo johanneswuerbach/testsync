@@ -1,6 +1,6 @@
 {
   "name": "testsync",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Helper library for testing intricate async code",
   "main": "index.js",
   "files": [
