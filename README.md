@@ -72,7 +72,7 @@ async function worker2() {
   expect(await cache.get(url)).to.be.ok()
 }
 
-await Promise.all([worker1, worker2])
+await Promise.all([worker1(), worker2()])
 ```
 
 ## License
