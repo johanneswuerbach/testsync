@@ -33,7 +33,7 @@ to automatically resolve the promise. The promise will never throw.
 
 For example:
 
-```
+```javascript
 const [a, b, c] = sync() // equivalent to sync(2)
 await Promise.all([a, a]) // resolves, `a` is awaited twice
 await Promise.all([b]) // never resolves, only awaited once
