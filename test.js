@@ -1,12 +1,12 @@
 const sync = require('./index')
 
-async function test(name, fn, timeout = 1000) {
+async function test(name, fn, timeout = 500) {
   try {
     if (timeout) {
       let tid
       await Promise.race([
         new Promise((_resolve, reject) => {
-          tid = setTimeout(() => reject(new Error('Timeout after ' + timeout + ' ms')), timeout)
+          tid = setTimeout(() => reject(new Error(`Timeout after ${timeout} ms`)), timeout)
         }),
         new Promise(resolve => resolve(fn())).then(
           res => {
@@ -20,9 +20,10 @@ async function test(name, fn, timeout = 1000) {
     } else {
       await new Promise(resolve => resolve(fn()))
     }
-    console.log('[pass] ' + name)
+    console.log(`[pass] ${name}`)
   } catch(e) {
-    console.log('[fail] ' + name + ': ' + e.message)
+    process.exitCode = 1
+    console.log(`[fail] ${name}: ${e.message}`)
     console.log(e.stack)
   }
 }
@@ -31,7 +32,7 @@ test('Syncing two per usual', async () => {
   const [first] = sync(2)
 
   await Promise.all([first, first])
-}, 100)
+})
 
 test('Interleaving unrelated promises', async () => {
   const [ready, done] = sync(2)
