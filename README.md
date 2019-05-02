@@ -1,8 +1,10 @@
 # [TestSync](https://github.com/twooster/testsync): A Helper for Testing Intricate Async Logic
 
 TestSync is a little helper library to aid in testing intricate ordering of
-asynchronous code in Javascript. TypeScript typings are included. This library
-is considered feature complete and no new features will be added.
+asynchronous code in Javascript. TypeScript typings are included.
+
+This library is feature complete and new new development is anticipated
+(though who knows).
 
 ## Installation
 
