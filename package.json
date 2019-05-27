@@ -4,7 +4,8 @@
   "description": "Helper library for testing intricate async code",
   "main": "index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "scripts": {
     "test": "node test.js"
