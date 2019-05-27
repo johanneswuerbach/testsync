@@ -75,6 +75,18 @@ test('Never syncing', async () => {
   }
 })
 
+test('Can be chained', async () => {
+  const [two] = sync()
+
+  const [foo, bar] = await Promise.all([two.then(() => 'foo'), two.then(() => 'bar')])
+  if (foo !== 'foo') {
+    throw new Error('Expected foo, got ' + foo)
+  }
+  if (bar !== 'bar') {
+    throw new Error('Expected bar, got ' + bar)
+  }
+})
+
 test('Oversyncing has no problems', async () => {
   const [two] = sync()
 

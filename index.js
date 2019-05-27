@@ -7,12 +7,13 @@ function * sync(count = 2) {
     const p = new Promise(r => { resolve = r })
     const then = p.then
     p.then = function () {
-      then.apply(this, arguments)
+      const result = then.apply(this, arguments)
       --i
       if (i <= 0) {
         p.then = then
         resolve()
       }
+      return result
     }
     yield p
   }
