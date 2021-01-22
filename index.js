@@ -2,20 +2,39 @@
 
 function * sync(count = 2) {
   while (1) {
-    let i = count
-    let resolve
-    const p = new Promise(r => { resolve = r })
-    const then = p.then
-    p.then = function () {
-      const result = then.apply(this, arguments)
-      --i
-      if (i <= 0) {
-        p.then = then
+    let waiters = []
+    const then = function(onFulfilled, onReject) {
+      let resolve, reject
+
+      const p = new Promise((res, rej) => {
+        resolve = res
+        reject = rej
+      }).then(onFulfilled, onReject)
+
+      if (waiters) {
+        waiters.push(resolve)
+        if (waiters.length === count) {
+          const tmp = waiters
+          waiters = undefined
+          for (const waiter of tmp) {
+            waiter()
+          }
+        }
+      } else {
         resolve()
       }
-      return result
+
+      return p
     }
-    yield p
+    yield ({
+      then,
+      catch(fn) {
+        return this.then(v => v, fn)
+      },
+      finally(fn) {
+        return this.then(fn)
+      }
+    })
   }
 }
 
