@@ -1,21 +1,32 @@
 'use strict'
 
+function resolvable (fn) {
+  let r;
+  const p = new Promise((resolve) => {
+    r = resolve
+  })
+
+  return { promise: p, resolve: () => r(fn()) }
+}
+
 function * sync(count = 2) {
   while (1) {
-    let i = count
-    let resolve
-    const p = new Promise(r => { resolve = r })
-    const then = p.then
-    p.then = function () {
-      const result = then.apply(this, arguments)
-      --i
-      if (i <= 0) {
-        p.then = then
-        resolve()
+    const waiters = []
+
+    yield {
+      then: (fn) => {
+        const resolvableWaiter = resolvable(fn)
+        waiters.push(resolvableWaiter);
+
+        if (waiters.length >= count) {
+          for (const waiter of waiters) {
+            waiter.resolve()
+          }
+        }
+
+        return resolvableWaiter.promise
       }
-      return result
     }
-    yield p
   }
 }
 
